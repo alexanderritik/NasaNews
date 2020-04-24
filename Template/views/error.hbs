@@ -1,0 +1,18 @@
+{{!-- here the body tag is open in header file --}}
+
+
+{{!-- the way we can include the partial are  --}}
+{{>headers}}
+    
+<div class="container">
+
+
+{{!-- the use of the partial is to write once and use multiple tiem like haeder--}}
+<h1> {{title}} </h1>
+<h1> {{name}} </h1>
+<h1>{{text}}</h1>
+</div>
+
+{{>footer}}
+
+{{!-- this is the closing of the footer file --}}
