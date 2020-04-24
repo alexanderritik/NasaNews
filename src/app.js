@@ -18,6 +18,8 @@ const partialpath=path.join(__dirname,'../Template/partials');
 // thsi is how we setup the app route and render
 const app=express();
 
+const port=process.env.PORT || 3000;
+
 // in this we directly accse sto index.html which
 // is a default path 
 app.use(express.static(publicDirectory))
@@ -131,8 +133,8 @@ app.get('*',(req,res)=>{
 
 
 // this is the command we use to start the server
-app.listen(3000,()=>{
-	console.log('We start the post a 3000')
+app.listen(port,()=>{
+	console.log('We start the post a port')
 })
 
 
