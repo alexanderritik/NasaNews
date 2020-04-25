@@ -8,7 +8,7 @@ let yyyy = today.getFullYear();
 let prev=1;
 const p=document.getElementById("text");
 const img=document.getElementById("img");
-
+const vid=document.getElementById("vid");
 
 function earthView(lat,lng){
 fetch(`https://api.nasa.gov/planetary/earth/assets?lon=${lng}&lat=${lat}&api_key=GUr0cBuZkQReQKu3cLg7BxCgtNZH15oeDgnRDjgz`)
@@ -27,16 +27,27 @@ fetch(`https://api.nasa.gov/planetary/apod?hd=True&api_key=GUr0cBuZkQReQKu3cLg7B
 .then(data=>{
   return data.json()
 }).then(res=>{
-    console.log(res);
-    const {copyright,date,explanation,hdurl}=res;
-    console.log(hdurl)
+    // console.log(res);
+    const {copyright,date,media_type,explanation,url}=res;
+    // console.log(hdurl)
     
-    console.log(img)
+    // console.log(img)
     img.setAttribute('src'," ")
     img.setAttribute('alt'," ")
-    img.setAttribute('src',hdurl)
-    img.setAttribute('alt',copyright)
-  
+
+    if(media_type=="image"){
+        img.style.display="block";
+        vid.style.display="none";
+        img.setAttribute('src',url)
+        img.setAttribute('alt',copyright)
+        
+    }
+    else
+    {
+        img.style.display="none";
+        vid.style.display="block";
+        vid.setAttribute('src',url)
+    }
     p.innerText=explanation
 })
 }
@@ -58,6 +69,8 @@ getLocation();
 const reset=()=>{
     img.setAttribute('src','')
     img.setAttribute('alt','')
+    vid.setAttribute('src','')
+    vid.style.display="none";
     p.innerHTML='<div class="text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>'
     
 }
